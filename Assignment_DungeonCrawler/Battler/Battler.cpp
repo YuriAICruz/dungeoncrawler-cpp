@@ -35,6 +35,11 @@ void Battler::CreateEnemies()
 
 Enemy& Battler::NextEnemy()
 {
+    if (_enemies[_currentEnemy].IsAlive())
+    {
+        return _enemies[_currentEnemy];
+    }
+    
     if (!HasAliveEnemy())
     {
         return _enemies[_currentEnemy];
@@ -65,6 +70,8 @@ bool Battler::HasAliveEnemy()
 
 void Battler::Battle(Human& a, Human& b)
 {
+    // A always attacks first TODO: add attribute speed, that way is easier to determine which one can go first
+
     b.DoDamage(a.GetDamage());
 
     if (!b.IsAlive())
